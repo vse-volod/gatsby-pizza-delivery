@@ -27,7 +27,8 @@
     "react-dom": "^16.13.1",
     "react-helmet": "^6.0.0",
     "typeface-merriweather": "0.0.72",
-    "typeface-montserrat": "0.0.75"
+    "typeface-montserrat": "0.0.75",
+    "use-cart": "^1.1.0"
   },
   "devDependencies": {
     "eslint": "^7.1.0",

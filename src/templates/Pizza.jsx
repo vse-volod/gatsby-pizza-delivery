@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import Layout from '../components/Layout';
 import SEO from '../components/Seo';
-import { rhythm, scale } from '../utils/typography';
 
 const PizzaTemplate = ({ data, location }) => {
   const pizza = data.mdx;
@@ -18,30 +17,16 @@ const PizzaTemplate = ({ data, location }) => {
       />
       <article>
         <header>
-          <h1
-            style={{
-              marginTop: rhythm(1),
-              marginBottom: 0,
-            }}
-          >
+          <h1>
             {pizza.frontmatter.title}
           </h1>
           <p
-            style={{
-              ...scale(-1 / 5),
-              display: 'block',
-              marginBottom: rhythm(1),
-            }}
+            style={{ display: 'block' }}
           >
             {pizza.frontmatter.date}
           </p>
         </header>
         <MDXRenderer>{pizza.body}</MDXRenderer>
-        <hr
-          style={{
-            marginBottom: rhythm(1),
-          }}
-        />
       </article>
     </Layout>
   );

@@ -3,7 +3,6 @@ import { Link, graphql } from 'gatsby';
 import PropTypes from 'prop-types';
 import Layout from '../components/Layout';
 import SEO from '../components/Seo';
-import { rhythm } from '../utils/typography';
 
 
 const PizzaDeliveryIndex = ({ data, location }) => {
@@ -18,11 +17,7 @@ const PizzaDeliveryIndex = ({ data, location }) => {
         return (
           <article key={node.fields.slug}>
             <header>
-              <h3
-                style={{
-                  marginBottom: rhythm(1 / 4),
-                }}
-              >
+              <h3>
                 <Link style={{ boxShadow: 'none' }} to={node.fields.slug}>
                   {title}
                 </Link>

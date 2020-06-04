@@ -6,14 +6,14 @@ import SEO from '../components/Seo';
 import { rhythm } from '../utils/typography';
 
 
-const BlogIndex = ({ data, location }) => {
+const PizzaDeliveryIndex = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata.title;
-  const posts = data.allMdx.edges;
+  const pizzas = data.allMdx.edges;
 
   return (
     <Layout location={location} title={siteTitle}>
-      <SEO title="All posts" />
-      {posts.map(({ node }) => {
+      <SEO title="All pizzas" />
+      {pizzas.map(({ node }) => {
         const title = node.frontmatter.title || node.fields.slug;
         return (
           <article key={node.fields.slug}>
@@ -44,12 +44,12 @@ const BlogIndex = ({ data, location }) => {
 };
 
 
-BlogIndex.propTypes = {
+PizzaDeliveryIndex.propTypes = {
   data: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
 };
 
-export default BlogIndex;
+export default PizzaDeliveryIndex;
 
 export const pageQuery = graphql`
   query {

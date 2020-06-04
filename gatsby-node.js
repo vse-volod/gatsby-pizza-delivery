@@ -4,7 +4,7 @@ const { createFilePath } = require('gatsby-source-filesystem');
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
 
-  const blogPost = path.resolve('./src/templates/BlogPost.jsx');
+  const pizzaTemplate = path.resolve('./src/templates/Pizza.jsx');
   const result = await graphql(
     `
       {
@@ -31,20 +31,15 @@ exports.createPages = async ({ graphql, actions }) => {
     throw result.errors;
   }
 
-  // Create blog posts pages.
-  const posts = result.data.allMdx.edges;
+  // Create pizza pages.
+  const pizzas = result.data.allMdx.edges;
 
-  posts.forEach((post, index) => {
-    const previous = index === posts.length - 1 ? null : posts[index + 1].node;
-    const next = index === 0 ? null : posts[index - 1].node;
-
+  pizzas.forEach((pizza) => {
     createPage({
-      path: post.node.fields.slug,
-      component: blogPost,
+      path: pizza.node.fields.slug,
+      component: pizzaTemplate,
       context: {
-        slug: post.node.fields.slug,
-        previous,
-        next,
+        slug: pizza.node.fields.slug,
       },
     });
   });
@@ -58,7 +53,7 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
     createNodeField({
       name: 'slug',
       node,
-      value,
+      value: `/pizza${value}`,
     });
   }
 };

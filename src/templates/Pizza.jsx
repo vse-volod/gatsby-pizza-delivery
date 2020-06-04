@@ -6,15 +6,15 @@ import Layout from '../components/Layout';
 import SEO from '../components/Seo';
 import { rhythm, scale } from '../utils/typography';
 
-const BlogPostTemplate = ({ data, location }) => {
-  const post = data.mdx;
+const PizzaTemplate = ({ data, location }) => {
+  const pizza = data.mdx;
   const siteTitle = data.site.siteMetadata.title;
 
   return (
     <Layout location={location} title={siteTitle}>
       <SEO
-        title={post.frontmatter.title}
-        description={post.frontmatter.description || post.excerpt}
+        title={pizza.frontmatter.title}
+        description={pizza.frontmatter.description || pizza.excerpt}
       />
       <article>
         <header>
@@ -24,7 +24,7 @@ const BlogPostTemplate = ({ data, location }) => {
               marginBottom: 0,
             }}
           >
-            {post.frontmatter.title}
+            {pizza.frontmatter.title}
           </h1>
           <p
             style={{
@@ -33,10 +33,10 @@ const BlogPostTemplate = ({ data, location }) => {
               marginBottom: rhythm(1),
             }}
           >
-            {post.frontmatter.date}
+            {pizza.frontmatter.date}
           </p>
         </header>
-        <MDXRenderer>{post.body}</MDXRenderer>
+        <MDXRenderer>{pizza.body}</MDXRenderer>
         <hr
           style={{
             marginBottom: rhythm(1),
@@ -47,12 +47,12 @@ const BlogPostTemplate = ({ data, location }) => {
   );
 };
 
-BlogPostTemplate.propTypes = {
+PizzaTemplate.propTypes = {
   data: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
 };
 
-export default BlogPostTemplate;
+export default PizzaTemplate;
 
 export const pageQuery = graphql`
   query BlogPostBySlug($slug: String!) {

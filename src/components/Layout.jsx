@@ -1,6 +1,45 @@
 import React from 'react';
 import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
+import { CartProvider, useCart } from 'use-cart';
+
+const Item = () => {
+  const { addItem } = useCart();
+  return (
+    <div>
+      <p>My item for sale</p>
+      <button type="button" onClick={() => addItem('TEST_SKU')}>Add to basket</button>
+    </div>
+  );
+};
+
+const Cart = () => {
+  const {
+    items, addItem, removeItem, removeLineItem, clearCart,
+  } = useCart();
+
+  return (
+    <div>
+      {items.map((item) => (
+        <div key={item.sku}>
+          {item.sku}
+          {' '}
+          -
+          {item.quantity}
+          {' '}
+          <button type="button" onClick={() => addItem(item.sku)}>Increase Quantity</button>
+          <button type="button" onClick={() => removeItem(item.sku)}>
+            Decrease Quantity
+          </button>
+          <button type="button" onClick={() => removeLineItem(item.sku)}>
+            Remove from cart
+          </button>
+        </div>
+      ))}
+      <button type="button" onClick={clearCart}>Clear Cart</button>
+    </div>
+  );
+};
 
 const Layout = ({ location, title, children }) => {
   const rootPath = '/';
@@ -43,23 +82,29 @@ const Layout = ({ location, title, children }) => {
     );
   }
   return (
-    <div
-      style={{
-        marginLeft: 'auto',
-        marginRight: 'auto',
-      }}
-    >
-      <header>{header}</header>
-      <main>{children}</main>
-      <footer>
-        ©
-        {' '}
-        {new Date().getFullYear()}
-        , Built with
-        {' '}
-        <a href="https://www.gatsbyjs.org">Gatsby</a>
-      </footer>
-    </div>
+    <CartProvider>
+      <div
+        style={{
+          marginLeft: 'auto',
+          marginRight: 'auto',
+        }}
+      >
+        <header>{header}</header>
+        <main>
+          {children}
+          <Item />
+          <Cart />
+        </main>
+        <footer>
+          ©
+          {' '}
+          {new Date().getFullYear()}
+          , Built with
+          {' '}
+          <a href="https://www.gatsbyjs.org">Gatsby</a>
+        </footer>
+      </div>
+    </CartProvider>
   );
 };
 

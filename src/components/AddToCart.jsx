@@ -16,7 +16,7 @@ const AddToCart = ({ price, sku }) => {
 };
 
 AddToCart.propTypes = {
-  price: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
   sku: PropTypes.string.isRequired,
 };
 

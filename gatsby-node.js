@@ -9,7 +9,7 @@ exports.createPages = async ({ graphql, actions }) => {
     `
       {
         allMdx(
-          sort: { fields: [frontmatter___date], order: DESC }
+          sort: { fields: [frontmatter___title], order: DESC }
           limit: 1000
         ) {
           edges {
@@ -54,6 +54,11 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
       name: 'slug',
       node,
       value: `/pizza${value}`,
+    });
+    createNodeField({
+      name: 'sku',
+      node,
+      value: `PZZA-${node.frontmatter.title.toUpperCase()}`,
     });
   }
 };

@@ -3,16 +3,6 @@ import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
 import { CartProvider, useCart } from 'use-cart';
 
-const Item = () => {
-  const { addItem } = useCart();
-  return (
-    <div>
-      <p>My item for sale</p>
-      <button type="button" onClick={() => addItem('TEST_SKU')}>Add to basket</button>
-    </div>
-  );
-};
-
 const Cart = () => {
   const {
     items, addItem, removeItem, removeLineItem, clearCart,
@@ -92,7 +82,6 @@ const Layout = ({ location, title, children }) => {
         <header>{header}</header>
         <main>
           {children}
-          <Item />
           <Cart />
         </main>
         <footer>

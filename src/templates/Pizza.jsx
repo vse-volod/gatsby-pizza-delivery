@@ -23,7 +23,7 @@ const PizzaTemplate = ({ data, location }) => {
           <p
             style={{ display: 'block' }}
           >
-            {pizza.frontmatter.date}
+            {pizza.frontmatter.price}
           </p>
         </header>
         <MDXRenderer>{pizza.body}</MDXRenderer>
@@ -53,7 +53,7 @@ export const pageQuery = graphql`
       body
       frontmatter {
         title
-        date(formatString: "MMMM DD, YYYY")
+        price
         description
       }
     }

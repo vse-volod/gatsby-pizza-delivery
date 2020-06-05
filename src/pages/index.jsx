@@ -3,16 +3,17 @@ import { Link, graphql } from 'gatsby';
 import PropTypes from 'prop-types';
 import Layout from '../components/Layout';
 import SEO from '../components/Seo';
+import AddToCart from '../components/AddToCart';
 
 
 const PizzaDeliveryIndex = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata.title;
-  const pizzas = data.allMdx.edges;
-
+  const pizzas = data.allMdx.nodes;
+  console.log('pizzas:', pizzas);
   return (
     <Layout location={location} title={siteTitle}>
       <SEO title="All pizzas" />
-      {pizzas.map(({ node }) => {
+      {pizzas.map((node) => {
         const title = node.frontmatter.title || node.fields.slug;
         return (
           <article key={node.fields.slug}>
@@ -22,7 +23,6 @@ const PizzaDeliveryIndex = ({ data, location }) => {
                   {title}
                 </Link>
               </h3>
-              <small>{node.frontmatter.date}</small>
             </header>
             <section>
               <p
@@ -31,6 +31,7 @@ const PizzaDeliveryIndex = ({ data, location }) => {
                 }}
               />
             </section>
+            <AddToCart price={node.frontmatter.price} sku={node.fields.sku} />
           </article>
         );
       })}
@@ -53,18 +54,17 @@ export const pageQuery = graphql`
         title
       }
     }
-    allMdx(sort: { fields: [frontmatter___date], order: DESC }) {
-      edges {
-        node {
-          excerpt
-          fields {
-            slug
-          }
-          frontmatter {
-            date(formatString: "MMMM DD, YYYY")
-            title
-            description
-          }
+    allMdx(sort: { fields: [frontmatter___title], order: DESC }) {
+      nodes {
+        excerpt
+        fields {
+          slug
+          sku
+        }
+        frontmatter {
+          title
+          price
+          description
         }
       }
     }

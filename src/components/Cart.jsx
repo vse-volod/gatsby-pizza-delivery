@@ -30,6 +30,8 @@ const Cart = () => {
     `,
   );
   const pizzas = data.allMdx;
+  const priceTotalInUSD = priceTotal(items, pizzas);
+  const exchangeRate = 1.13;
   if (items.length > 0) {
     return (
       <div>
@@ -54,7 +56,9 @@ const Cart = () => {
           Total:
           {lineItemsCount}
           /$
-          {priceTotal(items, pizzas)}
+          {priceTotalInUSD}
+          /€
+          {(priceTotalInUSD * exchangeRate).toFixed(2)}
         </div>
         <button type="button" onClick={clearCart}>Clear Cart</button>
       </div>

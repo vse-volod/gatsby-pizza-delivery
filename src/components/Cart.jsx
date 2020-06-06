@@ -4,8 +4,9 @@ import { useStaticQuery, graphql } from 'gatsby';
 import ItemControls from './ItemControls';
 
 const getPizzaData = (sku, pizzas) => pizzas.nodes.find((p) => p.fields.sku === sku).frontmatter;
-const priceTotal = (items, pizzas) => items.reduce(
-  (total, onePizza) => total + (getPizzaData(onePizza.sku, pizzas).price * onePizza.quantity), 0,
+const priceTotal = (items, pizzas, deliveryPrice) => items.reduce(
+  (total, onePizza) => total + (getPizzaData(onePizza.sku, pizzas).price * onePizza.quantity),
+  deliveryPrice,
 );
 
 const Cart = () => {
@@ -30,7 +31,8 @@ const Cart = () => {
     `,
   );
   const pizzas = data.allMdx;
-  const priceTotalInUSD = priceTotal(items, pizzas);
+  const deliveryPriceInUSD = 5;
+  const priceTotalInUSD = priceTotal(items, pizzas, deliveryPriceInUSD);
   const exchangeRate = 1.13;
   if (items.length > 0) {
     return (
@@ -52,6 +54,15 @@ const Cart = () => {
             </div>
           );
         })}
+        {lineItemsCount > 0 && (
+        <div>
+          delivery costs: $
+          {' '}
+          {deliveryPriceInUSD}
+          /€
+          {(deliveryPriceInUSD * exchangeRate).toFixed(2)}
+        </div>
+        )}
         <div>
           Total:
           {lineItemsCount}

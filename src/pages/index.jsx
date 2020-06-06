@@ -3,7 +3,7 @@ import { Link, graphql } from 'gatsby';
 import PropTypes from 'prop-types';
 import Layout from '../components/Layout';
 import SEO from '../components/Seo';
-import AddToCart from '../components/AddToCart';
+import ItemControls from '../components/ItemControls';
 
 
 const PizzaDeliveryIndex = ({ data, location }) => {
@@ -31,7 +31,7 @@ const PizzaDeliveryIndex = ({ data, location }) => {
                 }}
               />
             </section>
-            <AddToCart price={node.frontmatter.price} sku={node.fields.sku} />
+            <ItemControls price={node.frontmatter.price} sku={node.fields.sku} />
           </article>
         );
       })}

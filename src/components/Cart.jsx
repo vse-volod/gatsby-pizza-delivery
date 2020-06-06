@@ -1,6 +1,7 @@
 import React from 'react';
 import { useCart } from 'use-cart';
 import { useStaticQuery, graphql } from 'gatsby';
+import ItemControls from './ItemControls';
 
 const getPizzaData = (sku, pizzas) => pizzas.nodes.find((p) => p.fields.sku === sku).frontmatter;
 const priceTotal = (items, pizzas) => items.reduce(
@@ -9,7 +10,7 @@ const priceTotal = (items, pizzas) => items.reduce(
 
 const Cart = () => {
   const {
-    items, addItem, removeItem, removeLineItem, clearCart, lineItemsCount,
+    items, removeLineItem, clearCart, lineItemsCount,
   } = useCart();
   const data = useStaticQuery(
     graphql`
@@ -39,14 +40,10 @@ const Cart = () => {
               {pizzaData.title}
               {' '}
               -
-              {item.quantity}
-              {' '}
-              $
-              {pizzaData.price}
-              <button type="button" onClick={() => addItem(item.sku)}>Increase Quantity</button>
-              <button type="button" onClick={() => removeItem(item.sku)}>
-                Decrease Quantity
-              </button>
+              <ItemControls
+                price={pizzaData.price}
+                sku={item.sku}
+              />
               <button type="button" onClick={() => removeLineItem(item.sku)}>
                 Remove from cart
               </button>

@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
+import PropTypes from 'prop-types';
 import { useCart } from '../utils/useCart';
 import ItemControls from './ItemControls';
 
@@ -8,20 +9,9 @@ const priceTotal = (items, pizzas, deliveryPrice) => items.reduce(
   (total, onePizza) => total + (getPizzaData(onePizza.sku, pizzas).price * onePizza.quantity),
   deliveryPrice,
 );
+const convertPriceToEUR = (price, rate) => (rate ? (price * rate).toFixed(2) : 'N/A');
 
-const Cart = () => {
-  const [exchangeRate, setExchangeRate] = useState(1.13);
-  useEffect(() => {
-    async function fetchData() {
-      const res = await window.fetch('https://free.currconv.com/api/v7/convert?q=EUR_USD&compact=ultra&apiKey=22116ba83b453185f79c');
-      res
-        .json()
-        .then((result) => setExchangeRate(result.EUR_USD))
-        .catch((err) => console.error(err));
-    }
-
-    fetchData();
-  });
+const Cart = ({ exchangeRate }) => {
   const data = useStaticQuery(
     graphql`
       query {
@@ -71,7 +61,7 @@ const Cart = () => {
           {' '}
           {deliveryPriceInUSD}
           /€
-          {(deliveryPriceInUSD * exchangeRate).toFixed(2)}
+          {convertPriceToEUR(deliveryPriceInUSD, exchangeRate)}
         </div>
         )}
         <div>
@@ -80,13 +70,17 @@ const Cart = () => {
           /$
           {priceTotalInUSD}
           /€
-          {(priceTotalInUSD * exchangeRate).toFixed(2)}
+          {convertPriceToEUR(priceTotalInUSD, exchangeRate)}
         </div>
         <button type="button" onClick={clearCart}>Clear Cart</button>
       </div>
     );
   }
   return (<div>empty cart</div>);
+};
+
+Cart.propTypes = {
+  exchangeRate: PropTypes.number.isRequired,
 };
 
 export default Cart;

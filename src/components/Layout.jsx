@@ -3,11 +3,13 @@ import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
 import { CartProvider } from '../utils/useCart';
 import Cart from './Cart';
+import useExchangeRate from '../utils/useExchangeRate';
 
 
 const Layout = ({ location, title, children }) => {
   const rootPath = '/';
   let header;
+  const exchangeRate = useExchangeRate('EUR_USD');
 
   if (location.pathname === rootPath) {
     header = (
@@ -56,7 +58,7 @@ const Layout = ({ location, title, children }) => {
         <header>{header}</header>
         <main>
           {children}
-          <Cart />
+          <Cart exchangeRate={exchangeRate} />
         </main>
         <footer>
           ©

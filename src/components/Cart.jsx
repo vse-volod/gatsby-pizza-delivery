@@ -1,6 +1,6 @@
-import React from 'react';
-import { useCart } from 'use-cart';
+import React, { useEffect, useState } from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
+import { useCart } from '../utils/useCart';
 import ItemControls from './ItemControls';
 
 const getPizzaData = (sku, pizzas) => pizzas.nodes.find((p) => p.fields.sku === sku).frontmatter;
@@ -10,9 +10,18 @@ const priceTotal = (items, pizzas, deliveryPrice) => items.reduce(
 );
 
 const Cart = () => {
-  const {
-    items, removeLineItem, clearCart, lineItemsCount,
-  } = useCart();
+  const [exchangeRate, setExchangeRate] = useState(1.13);
+  useEffect(() => {
+    async function fetchData() {
+      const res = await window.fetch('https://free.currconv.com/api/v7/convert?q=EUR_USD&compact=ultra&apiKey=22116ba83b453185f79c');
+      res
+        .json()
+        .then((result) => setExchangeRate(result.EUR_USD))
+        .catch((err) => console.error(err));
+    }
+
+    fetchData();
+  });
   const data = useStaticQuery(
     graphql`
       query {
@@ -30,10 +39,12 @@ const Cart = () => {
       }
     `,
   );
+  const {
+    items, removeLineItem, clearCart, lineItemsCount, itemsCount,
+  } = useCart();
   const pizzas = data.allMdx;
   const deliveryPriceInUSD = 5;
   const priceTotalInUSD = priceTotal(items, pizzas, deliveryPriceInUSD);
-  const exchangeRate = 1.13;
   if (items.length > 0) {
     return (
       <div>
@@ -65,7 +76,7 @@ const Cart = () => {
         )}
         <div>
           Total:
-          {lineItemsCount}
+          {itemsCount}
           /$
           {priceTotalInUSD}
           /€

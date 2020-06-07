@@ -1,6 +1,6 @@
 import React from 'react';
-import { useCart } from 'use-cart';
 import PropTypes from 'prop-types';
+import { useCart } from '../utils/useCart';
 
 const ItemControls = ({ price, sku }) => {
   const { addItem, removeItem, items } = useCart();

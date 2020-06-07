@@ -1,8 +1,8 @@
 module.exports = {
   siteMetadata: {
-    title: 'Gatsby Pizza Delivery',
+    title: 'Saint Pizza',
     author: 'Vsevolod',
-    description: 'Pizza delivery site example made with Gatsby',
+    description: 'pizza & pasta',
     siteUrl: 'https://gatsbytemplates.io/',
     social: {
       twitter: 'gatsbytemplates',
@@ -54,5 +54,6 @@ module.exports = {
     },
     'gatsby-plugin-offline',
     'gatsby-plugin-react-helmet',
+    'gatsby-plugin-emotion',
   ],
 };

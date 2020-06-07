@@ -1,50 +1,54 @@
 import React from 'react';
 import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
+import { CartProvider } from '../utils/useCart';
+import Cart from './Cart';
+import useExchangeRate from '../utils/useExchangeRate';
 
-class Layout extends React.Component {
-  render() {
-    const { location, title, children } = this.props;
-    const rootPath = '/';
-    let header;
 
-    if (location.pathname === rootPath) {
-      header = (
-        <h1 style={{ marginTop: 0 }}>
-          <Link
-            style={{
-              boxShadow: 'none',
-              textDecoration: 'none',
-              color: 'inherit',
-            }}
-            to="/"
-          >
-            {title}
-          </Link>
-        </h1>
-      );
-    } else {
-      header = (
-        <h3
+const Layout = ({ location, title, children }) => {
+  const rootPath = '/';
+  let header;
+  const exchangeRate = useExchangeRate('EUR_USD');
+
+  if (location.pathname === rootPath) {
+    header = (
+      <h1 style={{ marginTop: 0 }}>
+        <Link
           style={{
-            fontFamily: 'Montserrat, sans-serif',
-            marginTop: 0,
+            boxShadow: 'none',
+            textDecoration: 'none',
+            color: 'inherit',
           }}
+          to="/"
         >
-          <Link
-            style={{
-              boxShadow: 'none',
-              textDecoration: 'none',
-              color: 'inherit',
-            }}
-            to="/"
-          >
-            {title}
-          </Link>
-        </h3>
-      );
-    }
-    return (
+          {title}
+        </Link>
+      </h1>
+    );
+  } else {
+    header = (
+      <h3
+        style={{
+          fontFamily: 'Montserrat, sans-serif',
+          marginTop: 0,
+        }}
+      >
+        <Link
+          style={{
+            boxShadow: 'none',
+            textDecoration: 'none',
+            color: 'inherit',
+          }}
+          to="/"
+        >
+          {title}
+        </Link>
+      </h3>
+    );
+  }
+  return (
+    <CartProvider>
       <div
         style={{
           marginLeft: 'auto',
@@ -52,7 +56,10 @@ class Layout extends React.Component {
         }}
       >
         <header>{header}</header>
-        <main>{children}</main>
+        <main>
+          {children}
+          <Cart exchangeRate={exchangeRate} />
+        </main>
         <footer>
           ©
           {' '}
@@ -62,9 +69,9 @@ class Layout extends React.Component {
           <a href="https://www.gatsbyjs.org">Gatsby</a>
         </footer>
       </div>
-    );
-  }
-}
+    </CartProvider>
+  );
+};
 
 Layout.propTypes = {
   location: PropTypes.any.isRequired,

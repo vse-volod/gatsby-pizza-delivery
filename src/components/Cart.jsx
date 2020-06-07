@@ -45,12 +45,13 @@ const Cart = ({ exchangeRate }) => {
               {pizzaData.title}
               {' '}
               -
+              $
+              {pizzaData.price}
               <ItemControls
-                price={pizzaData.price}
                 sku={item.sku}
               />
               <button type="button" onClick={() => removeLineItem(item.sku)}>
-                Remove from cart
+                X
               </button>
             </div>
           );
@@ -60,8 +61,9 @@ const Cart = ({ exchangeRate }) => {
           delivery costs: $
           {' '}
           {deliveryPriceInUSD}
-          /€
+          /
           {convertPriceToEUR(deliveryPriceInUSD, exchangeRate)}
+          €
         </div>
         )}
         <div>
@@ -69,8 +71,9 @@ const Cart = ({ exchangeRate }) => {
           {itemsCount}
           /$
           {priceTotalInUSD}
-          /€
+          /
           {convertPriceToEUR(priceTotalInUSD, exchangeRate)}
+          €
         </div>
         <button type="button" onClick={clearCart}>Clear Cart</button>
       </div>

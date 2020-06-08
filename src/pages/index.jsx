@@ -1,5 +1,6 @@
 import React from 'react';
 import { graphql } from 'gatsby';
+import Img from 'gatsby-image';
 import PropTypes from 'prop-types';
 import tw from 'twin.macro';
 import styled from '@emotion/styled';
@@ -26,7 +27,7 @@ const MenuItemControls = styled.div`
 
 const PizzaTitle = styled.h3`
   color: #333;
-  ${tw`font-bold text-lg pb-1`};
+  ${tw`font-bold text-lg uppercase pb-1`};
 `;
 
 const PizzaDescriptionSection = styled.section`
@@ -48,6 +49,10 @@ const PizzaDeliveryIndex = ({ data, location }) => {
         const title = node.frontmatter.title || node.fields.slug;
         return (
           <MenuItem key={node.fields.slug}>
+            <Img
+              alt={title}
+              fluid={node.frontmatter.featuredImage.childImageSharp.fluid}
+            />
             <MenuItemText>
               <PizzaTitle>
                 {title}
@@ -100,6 +105,13 @@ export const pageQuery = graphql`
           title
           price
           description
+          featuredImage {
+            childImageSharp {
+              fluid(maxWidth: 500) {
+                ...GatsbyImageSharpFluid_withWebp
+              }
+            }
+          }
         }
       }
     }

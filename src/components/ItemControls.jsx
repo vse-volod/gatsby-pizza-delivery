@@ -10,6 +10,12 @@ const ControlButton = styled.button`
 
 const Controls = styled.div`
   color: #337C31;
+  ${tw`flex`};
+`;
+
+const Quantity = styled.div`
+  min-width: 1.5rem;
+  ${tw`text-center`};
 `;
 
 const ItemControls = ({ sku }) => {
@@ -22,7 +28,9 @@ const ItemControls = ({ sku }) => {
         <ControlButton type="button" onClick={() => removeItem(sku)}>
           -
         </ControlButton>
-        {quantity}
+        <Quantity>
+          {quantity}
+        </Quantity>
         <ControlButton type="button" onClick={() => addItem(sku)}>
           +
         </ControlButton>

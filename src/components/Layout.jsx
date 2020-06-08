@@ -1,82 +1,47 @@
 import React from 'react';
 import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
+import tw from 'twin.macro';
+import styled from '@emotion/styled';
 import { CartProvider } from '../utils/useCart';
 import Cart from './Cart';
 import useExchangeRate from '../utils/useExchangeRate';
 
+const Container = styled.div`
+  ${tw`container mx-auto`}
+`;
 
-const Layout = ({ location, title, children }) => {
-  const rootPath = '/';
-  let header;
+const Layout = ({ title, children }) => {
   const exchangeRate = useExchangeRate('EUR_USD');
-
-  if (location.pathname === rootPath) {
-    header = (
-      <h1 style={{ marginTop: 0 }}>
-        <Link
-          style={{
-            boxShadow: 'none',
-            textDecoration: 'none',
-            color: 'inherit',
-          }}
-          to="/"
-        >
-          {title}
-        </Link>
-      </h1>
-    );
-  } else {
-    header = (
-      <h3
-        style={{
-          fontFamily: 'Montserrat, sans-serif',
-          marginTop: 0,
-        }}
-      >
-        <Link
-          style={{
-            boxShadow: 'none',
-            textDecoration: 'none',
-            color: 'inherit',
-          }}
-          to="/"
-        >
-          {title}
-        </Link>
-      </h3>
-    );
-  }
   return (
     <CartProvider>
-      <div
-        style={{
-          marginLeft: 'auto',
-          marginRight: 'auto',
-        }}
-      >
-        <header>{header}</header>
+      <Container>
+        <header>
+          <h1>
+            <Link
+              style={{
+                boxShadow: 'none',
+                textDecoration: 'none',
+                color: 'inherit',
+              }}
+              to="/"
+            >
+              {title}
+            </Link>
+          </h1>
+        </header>
         <main>
           {children}
           <Cart exchangeRate={exchangeRate} />
         </main>
-        <footer>
-          ©
-          {' '}
-          {new Date().getFullYear()}
-          , Built with
-          {' '}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
-        </footer>
-      </div>
+      </Container>
     </CartProvider>
   );
 };
 
 Layout.propTypes = {
-  location: PropTypes.any.isRequired,
-  title: PropTypes.any.isRequired,
-  children: PropTypes.any.isRequired,
+  title: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default Layout;

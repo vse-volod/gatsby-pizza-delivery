@@ -13,14 +13,14 @@ const MenuGrid = styled.div`
 `;
 
 const MenuItem = styled.article`
-  ${tw`border border-solid px-8 py-10`}
+  ${tw`flex flex-col border border-solid px-8 py-10`}
   border-color: #333;
   border-radius: 1rem;
 `;
 
 const MenuItemText = styled.header`
   min-height: 100px;
-  ${tw`flex flex-col`}
+  ${tw`flex flex-col h-full`}
 `;
 
 const MenuItemControls = styled.div`
@@ -31,7 +31,7 @@ const MenuItemControls = styled.div`
 
 const PizzaTitle = styled.h3`
   color: #333;
-  ${tw`font-bold text-lg uppercase pb-1`};
+  ${tw`font-bold text-lg uppercase pt-4 pb-1`};
 `;
 
 const PizzaDescriptionSection = styled.section`
@@ -54,10 +54,12 @@ const PizzaDeliveryIndex = ({ data, location }) => {
           const title = node.frontmatter.title || node.fields.slug;
           return (
             <MenuItem key={node.fields.slug}>
-              <Img
-                alt={title}
-                fluid={node.frontmatter.featuredImage.childImageSharp.fluid}
-              />
+              <div>
+                <Img
+                  alt={title}
+                  fluid={node.frontmatter.featuredImage.childImageSharp.fluid}
+                />
+              </div>
               <MenuItemText>
                 <PizzaTitle>
                   {title}

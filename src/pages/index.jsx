@@ -21,12 +21,12 @@ const MenuItem = styled.article`
 const MenuItemText = styled.header`
   min-height: 100px;
   ${tw`flex flex-col h-full`}
+  font-family: 'Montserrat';
 `;
 
 const MenuItemControls = styled.div`
   color: #333;
   ${tw`flex justify-between text-xl font-semibold`};
-  font-family: 'Montserrat';
 `;
 
 const PizzaTitle = styled.h3`
@@ -42,27 +42,26 @@ const PizzaDescriptionSection = styled.section`
   }
 `;
 
-const PizzaDeliveryIndex = ({ data, location }) => {
-  const siteTitle = data.site.siteMetadata.title;
+const PizzaDeliveryIndex = ({ data }) => {
   const pizzas = data.allMdx.nodes;
   console.log('pizzas:', pizzas);
   return (
-    <Layout location={location} title={siteTitle}>
+    <Layout>
       <SEO title="All pizzas" />
       <MenuGrid>
         {pizzas.map((node) => {
-          const title = node.frontmatter.title || node.fields.slug;
+          const pizzaTitle = node.frontmatter.title || node.fields.slug;
           return (
             <MenuItem key={node.fields.slug}>
               <div>
                 <Img
-                  alt={title}
+                  alt={pizzaTitle}
                   fluid={node.frontmatter.featuredImage.childImageSharp.fluid}
                 />
               </div>
               <MenuItemText>
                 <PizzaTitle>
-                  {title}
+                  {pizzaTitle}
                 </PizzaTitle>
                 <PizzaDescriptionSection>
                   <p
@@ -90,18 +89,12 @@ const PizzaDeliveryIndex = ({ data, location }) => {
 
 PizzaDeliveryIndex.propTypes = {
   data: PropTypes.object.isRequired,
-  location: PropTypes.object.isRequired,
 };
 
 export default PizzaDeliveryIndex;
 
 export const pageQuery = graphql`
   query {
-    site {
-      siteMetadata {
-        title
-      }
-    }
     allMdx(sort: { fields: [frontmatter___title], order: DESC }) {
       nodes {
         excerpt

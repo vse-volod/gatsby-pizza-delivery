@@ -52,6 +52,23 @@ module.exports = {
         icon: 'content/assets/pizza-icon.png',
       },
     },
+    {
+      resolve: 'gatsby-plugin-prefetch-google-fonts',
+      options: {
+        fonts: [
+          {
+            family: 'Pacifico',
+            subsets: ['latin'],
+            variants: ['400'],
+          },
+          {
+            family: 'Montserrat',
+            subsets: ['latin'],
+            variants: ['400', '700'],
+          },
+        ],
+      },
+    },
     'gatsby-plugin-offline',
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-emotion',

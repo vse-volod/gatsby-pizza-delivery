@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Link from 'gatsby-link';
 import { useStaticQuery, graphql } from 'gatsby';
 import tw from 'twin.macro';
 import styled from '@emotion/styled';
@@ -55,10 +56,10 @@ const Header = ({ cartHandler, cartOpened }) => {
   const { title, description } = data.site.siteMetadata;
   return (
     <HeaderSection>
-      <div>
+      <Link to="/">
         <Title>{title}</Title>
         <SubTitle>{description}</SubTitle>
-      </div>
+      </Link>
       <HeaderButtons>
         <Button type="button">
           <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">

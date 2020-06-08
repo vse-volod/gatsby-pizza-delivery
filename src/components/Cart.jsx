@@ -1,8 +1,36 @@
 import React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
+import Link from 'gatsby-link';
 import PropTypes from 'prop-types';
+import tw from 'twin.macro';
+import styled from '@emotion/styled';
 import { useCart } from '../utils/useCart';
 import ItemControls from './ItemControls';
+
+const CartItem = styled.div`
+  font-family: 'Montserrat';
+  ${tw`flex items-center text-black uppercase font-semibold p-3 border-b border-black`}
+`;
+
+const CartItemTitle = styled.div`
+  ${tw`pr-2`}
+  flex: 1;
+`;
+
+const CartFooter = styled.div`
+  ${tw`flex justify-between p-4`}
+`;
+
+// const CartButton = styled.button`
+
+// `;
+
+const CartButton = styled((p) => (
+  <Link {...p} />
+))`
+  ${tw`rounded-full px-4 py-1 text-white`}
+  background-color: #D45D27;
+`;
 
 const getPizzaData = (sku, pizzas) => pizzas.nodes.find((p) => p.fields.sku === sku).frontmatter;
 const priceTotal = (items, pizzas, deliveryPrice) => items.reduce(
@@ -41,38 +69,50 @@ const Cart = ({ exchangeRate }) => {
         {items.map((item) => {
           const pizzaData = getPizzaData(item.sku, pizzas);
           return (
-            <div key={item.sku}>
-              {pizzaData.title}
-              {' '}
-              -
+            <CartItem key={item.sku}>
+              <CartItemTitle>
+                {pizzaData.title}
+              </CartItemTitle>
+              $
+              {pizzaData.price * item.quantity}
+              /
+              {convertPriceToEUR((pizzaData.price * item.quantity), exchangeRate)}
+              €
               <ItemControls
-                price={pizzaData.price}
                 sku={item.sku}
               />
               <button type="button" onClick={() => removeLineItem(item.sku)}>
-                Remove from cart
+                X
               </button>
-            </div>
+            </CartItem>
           );
         })}
         {lineItemsCount > 0 && (
-        <div>
-          delivery costs: $
-          {' '}
+        <CartItem>
+          <CartItemTitle>delivery costs:</CartItemTitle>
+          $
           {deliveryPriceInUSD}
-          /€
+          /
           {convertPriceToEUR(deliveryPriceInUSD, exchangeRate)}
-        </div>
+          €
+        </CartItem>
         )}
-        <div>
-          Total:
-          {itemsCount}
-          /$
+        <CartItem>
+          <CartItemTitle>
+            Total:
+            {' '}
+            {itemsCount}
+          </CartItemTitle>
+          $
           {priceTotalInUSD}
-          /€
+          /
           {convertPriceToEUR(priceTotalInUSD, exchangeRate)}
-        </div>
-        <button type="button" onClick={clearCart}>Clear Cart</button>
+          €
+        </CartItem>
+        <CartFooter>
+          <button type="button" onClick={clearCart}>Clear Cart</button>
+          <CartButton to="/order">Submit Order</CartButton>
+        </CartFooter>
       </div>
     );
   }

@@ -1,82 +1,67 @@
-import React from 'react';
-import { Link } from 'gatsby';
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import PropTypes from 'prop-types';
+import tw from 'twin.macro';
+import styled from '@emotion/styled';
 import { CartProvider } from '../utils/useCart';
 import Cart from './Cart';
+import Header from './Header';
 import useExchangeRate from '../utils/useExchangeRate';
 
+const Container = styled.div`
+  ${tw`container mx-auto py-12 sm:py-24 px-2 sm:px-0`}
+`;
 
-const Layout = ({ location, title, children }) => {
-  const rootPath = '/';
-  let header;
+const CartFrame = styled.div`
+  background-color: #bcb8b4db;
+  ${tw`rounded-bl-lg`}
+`;
+
+const LayoutSection = styled.section`
+  ${tw`relative overflow-hidden`}
+`;
+
+const Motion = styled(motion.div)`
+  ${tw`flex`}
+`;
+
+const CartContainer = styled.div`
+  ${tw`absolute top-0 right-0`}
+`;
+
+const Layout = ({ children }) => {
+  const [cartOpened, setCartOpen] = useState(false);
+  const cartFrameVariants = {
+    open: { opacity: 1, x: 0 },
+    hidden: { opacity: 0, x: 300 },
+  };
   const exchangeRate = useExchangeRate('EUR_USD');
-
-  if (location.pathname === rootPath) {
-    header = (
-      <h1 style={{ marginTop: 0 }}>
-        <Link
-          style={{
-            boxShadow: 'none',
-            textDecoration: 'none',
-            color: 'inherit',
-          }}
-          to="/"
-        >
-          {title}
-        </Link>
-      </h1>
-    );
-  } else {
-    header = (
-      <h3
-        style={{
-          fontFamily: 'Montserrat, sans-serif',
-          marginTop: 0,
-        }}
-      >
-        <Link
-          style={{
-            boxShadow: 'none',
-            textDecoration: 'none',
-            color: 'inherit',
-          }}
-          to="/"
-        >
-          {title}
-        </Link>
-      </h3>
-    );
-  }
   return (
     <CartProvider>
-      <div
-        style={{
-          marginLeft: 'auto',
-          marginRight: 'auto',
-        }}
-      >
-        <header>{header}</header>
-        <main>
+      <Header cartHandler={setCartOpen} cartOpened={cartOpened} />
+      <LayoutSection>
+        <Container>
           {children}
-          <Cart exchangeRate={exchangeRate} />
-        </main>
-        <footer>
-          ©
-          {' '}
-          {new Date().getFullYear()}
-          , Built with
-          {' '}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
-        </footer>
-      </div>
+          <Motion
+            initial="hidden"
+            animate={cartOpened ? 'open' : 'hidden'}
+          >
+            <CartContainer>
+              <Motion variants={cartFrameVariants}>
+                <CartFrame>
+                  <Cart exchangeRate={exchangeRate} />
+                </CartFrame>
+              </Motion>
+            </CartContainer>
+          </Motion>
+        </Container>
+      </LayoutSection>
     </CartProvider>
   );
 };
 
 Layout.propTypes = {
-  location: PropTypes.any.isRequired,
-  title: PropTypes.any.isRequired,
-  children: PropTypes.any.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default Layout;

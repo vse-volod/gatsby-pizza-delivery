@@ -1,8 +1,8 @@
 module.exports = {
   siteMetadata: {
-    title: 'Gatsby Pizza Delivery',
+    title: 'Saint Pizza',
     author: 'Vsevolod',
-    description: 'Pizza delivery site example made with Gatsby',
+    description: 'pizza & pasta',
     siteUrl: 'https://gatsbytemplates.io/',
     social: {
       twitter: 'gatsbytemplates',
@@ -47,12 +47,30 @@ module.exports = {
         short_name: 'PizzaPizza',
         start_url: '/',
         background_color: '#ffffff',
-        theme_color: '#663399',
+        theme_color: '#D45D27',
         display: 'minimal-ui',
-        icon: 'content/assets/gatsby-icon.png',
+        icon: 'content/assets/pizza-icon.png',
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-prefetch-google-fonts',
+      options: {
+        fonts: [
+          {
+            family: 'Pacifico',
+            subsets: ['latin'],
+            variants: ['400'],
+          },
+          {
+            family: 'Montserrat',
+            subsets: ['latin'],
+            variants: ['400', '600', '700'],
+          },
+        ],
       },
     },
     'gatsby-plugin-offline',
     'gatsby-plugin-react-helmet',
+    'gatsby-plugin-emotion',
   ],
 };

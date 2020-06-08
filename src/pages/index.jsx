@@ -8,6 +8,10 @@ import Layout from '../components/Layout';
 import SEO from '../components/Seo';
 import ItemControls from '../components/ItemControls';
 
+const MenuGrid = styled.div`
+  ${tw`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8`}
+`;
+
 const MenuItem = styled.article`
   ${tw`border border-solid px-8 py-10`}
   border-color: #333;
@@ -45,36 +49,38 @@ const PizzaDeliveryIndex = ({ data, location }) => {
   return (
     <Layout location={location} title={siteTitle}>
       <SEO title="All pizzas" />
-      {pizzas.map((node) => {
-        const title = node.frontmatter.title || node.fields.slug;
-        return (
-          <MenuItem key={node.fields.slug}>
-            <Img
-              alt={title}
-              fluid={node.frontmatter.featuredImage.childImageSharp.fluid}
-            />
-            <MenuItemText>
-              <PizzaTitle>
-                {title}
-              </PizzaTitle>
-              <PizzaDescriptionSection>
-                <p
-                  dangerouslySetInnerHTML={{
-                    __html: node.frontmatter.description || node.excerpt,
-                  }}
-                />
-                <MenuItemControls>
-                  <div>
-                    $
-                    {node.frontmatter.price}
-                  </div>
-                  <ItemControls sku={node.fields.sku} />
-                </MenuItemControls>
-              </PizzaDescriptionSection>
-            </MenuItemText>
-          </MenuItem>
-        );
-      })}
+      <MenuGrid>
+        {pizzas.map((node) => {
+          const title = node.frontmatter.title || node.fields.slug;
+          return (
+            <MenuItem key={node.fields.slug}>
+              <Img
+                alt={title}
+                fluid={node.frontmatter.featuredImage.childImageSharp.fluid}
+              />
+              <MenuItemText>
+                <PizzaTitle>
+                  {title}
+                </PizzaTitle>
+                <PizzaDescriptionSection>
+                  <p
+                    dangerouslySetInnerHTML={{
+                      __html: node.frontmatter.description || node.excerpt,
+                    }}
+                  />
+                  <MenuItemControls>
+                    <div>
+                      $
+                      {node.frontmatter.price}
+                    </div>
+                    <ItemControls sku={node.fields.sku} />
+                  </MenuItemControls>
+                </PizzaDescriptionSection>
+              </MenuItemText>
+            </MenuItem>
+          );
+        })}
+      </MenuGrid>
     </Layout>
   );
 };

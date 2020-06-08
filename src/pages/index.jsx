@@ -44,7 +44,6 @@ const PizzaDescriptionSection = styled.section`
 
 const PizzaDeliveryIndex = ({ data }) => {
   const pizzas = data.allMdx.nodes;
-  console.log('pizzas:', pizzas);
   return (
     <Layout>
       <SEO title="All pizzas" />

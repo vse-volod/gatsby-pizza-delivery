@@ -41,11 +41,11 @@ const Layout = ({ children }) => {
       <Header cartHandler={setCartOpen} cartOpened={cartOpened} />
       <LayoutSection>
         <Container>
+          {children}
           <Motion
             initial="hidden"
             animate={cartOpened ? 'open' : 'hidden'}
           >
-            {children}
             <CartContainer>
               <Motion variants={cartFrameVariants}>
                 <CartFrame>

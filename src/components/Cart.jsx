@@ -1,8 +1,29 @@
 import React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 import PropTypes from 'prop-types';
+import tw from 'twin.macro';
+import styled from '@emotion/styled';
 import { useCart } from '../utils/useCart';
 import ItemControls from './ItemControls';
+
+const CartItem = styled.div`
+  font-family: 'Montserrat';
+  ${tw`flex text-black uppercase font-semibold p-3 border-b border-black`}
+`;
+
+const CartItemTitle = styled.div`
+  ${tw`pr-2`}
+  flex: 1;
+`;
+
+const CartFooter = styled.div`
+  ${tw`flex justify-between p-4`}
+`;
+
+const CartButton = styled.button`
+  ${tw`rounded-full px-4 py-1 text-white`}
+  background-color: #D45D27;
+`;
 
 const getPizzaData = (sku, pizzas) => pizzas.nodes.find((p) => p.fields.sku === sku).frontmatter;
 const priceTotal = (items, pizzas, deliveryPrice) => items.reduce(
@@ -41,41 +62,50 @@ const Cart = ({ exchangeRate }) => {
         {items.map((item) => {
           const pizzaData = getPizzaData(item.sku, pizzas);
           return (
-            <div key={item.sku}>
-              {pizzaData.title}
-              {' '}
-              -
+            <CartItem key={item.sku}>
+              <CartItemTitle>
+                {pizzaData.title}
+              </CartItemTitle>
               $
-              {pizzaData.price}
+              {pizzaData.price * item.quantity}
+              /
+              {convertPriceToEUR((pizzaData.price * item.quantity), exchangeRate)}
+              €
               <ItemControls
                 sku={item.sku}
               />
               <button type="button" onClick={() => removeLineItem(item.sku)}>
                 X
               </button>
-            </div>
+            </CartItem>
           );
         })}
         {lineItemsCount > 0 && (
-        <div>
-          delivery costs: $
-          {' '}
+        <CartItem>
+          <CartItemTitle>delivery costs:</CartItemTitle>
+          $
           {deliveryPriceInUSD}
           /
           {convertPriceToEUR(deliveryPriceInUSD, exchangeRate)}
           €
-        </div>
+        </CartItem>
         )}
-        <div>
-          Total:
-          {itemsCount}
-          /$
+        <CartItem>
+          <CartItemTitle>
+            Total:
+            {' '}
+            {itemsCount}
+          </CartItemTitle>
+          $
           {priceTotalInUSD}
           /
           {convertPriceToEUR(priceTotalInUSD, exchangeRate)}
           €
-        </div>
-        <button type="button" onClick={clearCart}>Clear Cart</button>
+        </CartItem>
+        <CartFooter>
+          <button type="button" onClick={clearCart}>Clear Cart</button>
+          <CartButton type="button">Submit Order</CartButton>
+        </CartFooter>
       </div>
     );
   }

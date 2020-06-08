@@ -9,7 +9,7 @@ import Header from './Header';
 import useExchangeRate from '../utils/useExchangeRate';
 
 const Container = styled.div`
-  ${tw`container mx-auto py-12 sm:py-24`}
+  ${tw`container mx-auto py-12 sm:py-24 px-2 sm:px-0`}
 `;
 
 const CartFrame = styled.div`

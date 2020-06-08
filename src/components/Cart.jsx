@@ -8,7 +8,7 @@ import ItemControls from './ItemControls';
 
 const CartItem = styled.div`
   font-family: 'Montserrat';
-  ${tw`flex text-black uppercase font-semibold p-3 border-b border-black`}
+  ${tw`flex items-center text-black uppercase font-semibold p-3 border-b border-black`}
 `;
 
 const CartItemTitle = styled.div`

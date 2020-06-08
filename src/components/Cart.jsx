@@ -1,5 +1,6 @@
 import React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
+import Link from 'gatsby-link';
 import PropTypes from 'prop-types';
 import tw from 'twin.macro';
 import styled from '@emotion/styled';
@@ -20,7 +21,13 @@ const CartFooter = styled.div`
   ${tw`flex justify-between p-4`}
 `;
 
-const CartButton = styled.button`
+// const CartButton = styled.button`
+
+// `;
+
+const CartButton = styled((p) => (
+  <Link {...p} />
+))`
   ${tw`rounded-full px-4 py-1 text-white`}
   background-color: #D45D27;
 `;
@@ -104,7 +111,7 @@ const Cart = ({ exchangeRate }) => {
         </CartItem>
         <CartFooter>
           <button type="button" onClick={clearCart}>Clear Cart</button>
-          <CartButton type="button">Submit Order</CartButton>
+          <CartButton to="/order">Submit Order</CartButton>
         </CartFooter>
       </div>
     );

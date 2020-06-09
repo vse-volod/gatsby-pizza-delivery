@@ -1,14 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 import tw from 'twin.macro';
 import styled from '@emotion/styled';
 import { useCart } from '../utils/useCart';
+import Heading from './Heading';
 
-const Heading = styled.h1`
-  ${tw`text-3xl font-bold px-3 pt-4`}
-  color: #D45D27;
-`;
 
 const Input = styled.input`
   border-radius: 1rem;
@@ -32,16 +29,10 @@ const OrderFormButton = styled.input`
 
 const OrderForm = ({ onSubmit }) => {
   const { register, handleSubmit, errors } = useForm();
-  const [displayForm, toggleDisplayForm] = useState(true);
-  const { itemsCount, clearCart } = useCart();
+  const { itemsCount } = useCart();
   const submitForm = (data) => {
-    toggleDisplayForm(false);
-    clearCart();
     onSubmit(data);
   };
-  if (!displayForm) {
-    return <Heading>Thank you for the order!</Heading>;
-  }
   if (itemsCount === 0) {
     return <div>Add some pizzas to your cart first!</div>;
   }

@@ -1,5 +1,5 @@
 import React, {
-  useContext, createContext,
+  useContext, createContext, useReducer,
 } from 'react';
 import PropTypes from 'prop-types';
 import { reducer } from './reducer';
@@ -7,9 +7,10 @@ import useLocallyPersistedReducer from './reducerSync';
 
 const CartContext = createContext();
 
+const useCachedReducer = typeof window === 'undefined' ? useReducer : useLocallyPersistedReducer;
 
 export const CartProvider = ({ children, initialCart }) => {
-  const [state, dispatch] = useLocallyPersistedReducer(reducer, { items: initialCart }, 'cart');
+  const [state, dispatch] = useCachedReducer(reducer, { items: initialCart }, 'cart');
 
   const addItemHandler = (sku, quantity = 1) => {
     dispatch({ type: 'ADD_ITEM', payload: { sku, quantity } });

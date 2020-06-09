@@ -1,6 +1,6 @@
 import React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
-import Link from 'gatsby-link';
+import { AnchorLink } from 'gatsby-plugin-anchor-links';
 import PropTypes from 'prop-types';
 import tw from 'twin.macro';
 import styled from '@emotion/styled';
@@ -21,12 +21,8 @@ const CartFooter = styled.div`
   ${tw`flex justify-between p-4`}
 `;
 
-// const CartButton = styled.button`
-
-// `;
-
 const CartButton = styled((p) => (
-  <Link {...p} />
+  <AnchorLink {...p} />
 ))`
   ${tw`rounded-full px-4 py-1 text-white`}
   background-color: #D45D27;
@@ -39,7 +35,7 @@ const priceTotal = (items, pizzas, deliveryPrice) => items.reduce(
 );
 const convertPriceToEUR = (price, rate) => (rate ? (price * rate).toFixed(2) : 'N/A');
 
-const Cart = ({ exchangeRate }) => {
+const Cart = ({ exchangeRate, hideFooter }) => {
   const data = useStaticQuery(
     graphql`
       query {
@@ -109,10 +105,12 @@ const Cart = ({ exchangeRate }) => {
           {convertPriceToEUR(priceTotalInUSD, exchangeRate)}
           €
         </CartItem>
-        <CartFooter>
-          <button type="button" onClick={clearCart}>Clear Cart</button>
-          <CartButton to="/order">Submit Order</CartButton>
-        </CartFooter>
+        {!hideFooter && (
+          <CartFooter>
+            <button type="button" onClick={clearCart}>Clear Cart</button>
+            <CartButton to="/order#order-review">Submit Order</CartButton>
+          </CartFooter>
+        )}
       </div>
     );
   }
@@ -121,6 +119,11 @@ const Cart = ({ exchangeRate }) => {
 
 Cart.propTypes = {
   exchangeRate: PropTypes.number.isRequired,
+  hideFooter: PropTypes.bool,
+};
+
+Cart.defaultProps = {
+  hideFooter: false,
 };
 
 export default Cart;

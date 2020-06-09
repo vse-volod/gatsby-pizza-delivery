@@ -27,6 +27,7 @@ const Motion = styled(motion.div)`
 
 const CartContainer = styled.div`
   ${tw`absolute top-0 right-0`}
+  display: ${(p) => (p.cartOpened ? 'block' : 'none')};
 `;
 
 const Layout = ({ children }) => {
@@ -46,7 +47,7 @@ const Layout = ({ children }) => {
             initial="hidden"
             animate={cartOpened ? 'open' : 'hidden'}
           >
-            <CartContainer>
+            <CartContainer cartOpened={cartOpened}>
               <Motion variants={cartFrameVariants}>
                 <CartFrame>
                   <Cart exchangeRate={exchangeRate} />

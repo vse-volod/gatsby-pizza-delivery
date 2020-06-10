@@ -53,6 +53,12 @@ module.exports = {
       },
     },
     {
+      resolve: 'gatsby-plugin-env-variables',
+      options: {
+        whitelist: ['CURRCONV_API_KEY', 'GETFORM_API_KEY'],
+      },
+    },
+    {
       resolve: 'gatsby-plugin-prefetch-google-fonts',
       options: {
         fonts: [

@@ -26,14 +26,14 @@ const HeaderButtons = styled.div`
 `;
 
 const Button = styled.button`
-    ${tw`relative pl-8 focus:outline-none`}
+  ${tw`relative pl-8 focus:outline-none`}
 `;
 
 const QtyIndicator = styled.div`
-    background-color: #FF5E15;
-    right: -1.4rem;
-    ${tw`text-white text-sm font-semibold rounded-full 
-    w-6 h-6 leading-6 inline-block text-center absolute bottom-0`}
+  background-color: #FF5E15;
+  right: -1.4rem;
+  ${tw`text-white text-sm font-semibold rounded-full 
+  w-6 h-6 leading-6 inline-block text-center absolute bottom-0`}
 `;
 
 const Header = ({ cartHandler, cartOpened }) => {

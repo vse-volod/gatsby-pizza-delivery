@@ -18,8 +18,8 @@ const Quantity = styled.div`
 `;
 
 const ItemControls = ({ sku }) => {
-  const { addItem, removeItem, items } = useCart();
-  const currentItemInCart = items.find((cartItem) => cartItem.sku === sku);
+  const { addItem, removeItem, getItem } = useCart();
+  const currentItemInCart = getItem(sku);
   const quantity = currentItemInCart ? currentItemInCart.quantity : 0;
   return (
     <section>

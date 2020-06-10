@@ -5,7 +5,7 @@ import styled from '@emotion/styled';
 import { useCart } from '../utils/useCart';
 
 const ControlButton = styled.button`
-  ${tw`px-3 focus:outline-none hover:cursor-pointer`};
+  ${tw`px-3 focus:outline-none hover:cursor-pointer last:pr-0`};
 `;
 
 const Controls = styled.div`

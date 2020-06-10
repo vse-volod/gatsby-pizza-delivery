@@ -1,16 +1,13 @@
-import React, {
-  useContext, createContext, useReducer,
-} from 'react';
+import React, { useReducer, useContext, createContext } from 'react';
 import PropTypes from 'prop-types';
 import { reducer } from './reducer';
 import useLocallyPersistedReducer from './reducerSync';
 
 const CartContext = createContext();
 
-const useCachedReducer = typeof window === 'undefined' ? useReducer : useLocallyPersistedReducer;
-
-export const CartProvider = ({ children, initialCart }) => {
-  const [state, dispatch] = useCachedReducer(reducer, { items: initialCart }, 'cart');
+export const CartProvider = ({ children, initialCart = [] }) => {
+  const useCachedReducer = typeof window === 'undefined' ? useReducer : useLocallyPersistedReducer;
+  const [state, dispatch] = useCachedReducer(reducer, { items: initialCart });
 
   const addItemHandler = (sku, quantity = 1) => {
     dispatch({ type: 'ADD_ITEM', payload: { sku, quantity } });
@@ -55,11 +52,8 @@ export const CartProvider = ({ children, initialCart }) => {
 
 CartProvider.propTypes = {
   children: PropTypes.node.isRequired,
-  initialCart: PropTypes.array,
+  initialCart: PropTypes.array.isRequired,
 };
 
-CartProvider.defaultProps = {
-  initialCart: [],
-};
 
 export const useCart = () => useContext(CartContext);

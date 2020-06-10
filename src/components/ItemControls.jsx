@@ -5,12 +5,11 @@ import styled from '@emotion/styled';
 import { useCart } from '../utils/useCart';
 
 const ControlButton = styled.button`
-  ${tw`px-3 focus:outline-none hover:cursor-pointer`};
+  ${tw`px-3 focus:outline-none hover:cursor-pointer last:pr-0`};
 `;
 
 const Controls = styled.div`
-  color: #337C31;
-  ${tw`flex`};
+  ${tw`flex text-green`};
 `;
 
 const Quantity = styled.div`
@@ -19,8 +18,8 @@ const Quantity = styled.div`
 `;
 
 const ItemControls = ({ sku }) => {
-  const { addItem, removeItem, items } = useCart();
-  const currentItemInCart = items.find((cartItem) => cartItem.sku === sku);
+  const { addItem, removeItem, getItem } = useCart();
+  const currentItemInCart = getItem(sku);
   const quantity = currentItemInCart ? currentItemInCart.quantity : 0;
   return (
     <section>

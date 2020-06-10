@@ -13,25 +13,21 @@ const MenuGrid = styled.div`
 `;
 
 const MenuItem = styled.article`
-  ${tw`flex flex-col border border-solid px-8 py-10`}
-  border-color: #333;
+  ${tw`flex flex-col border border-solid border-dark px-8 py-10`}
   border-radius: 1rem;
 `;
 
 const MenuItemText = styled.header`
   min-height: 100px;
-  ${tw`flex flex-col h-full`}
-  font-family: 'Montserrat';
+  ${tw`flex flex-col h-full font-body`}
 `;
 
 const MenuItemControls = styled.div`
-  color: #333;
-  ${tw`flex justify-between text-xl font-semibold`};
+  ${tw`flex justify-between text-xl font-semibold text-dark`};
 `;
 
 const PizzaTitle = styled.h3`
-  color: #333;
-  ${tw`font-bold text-lg uppercase pt-4 pb-1`};
+  ${tw`font-bold text-lg uppercase pt-4 pb-1 text-dark`};
 `;
 
 const PizzaDescriptionSection = styled.section`

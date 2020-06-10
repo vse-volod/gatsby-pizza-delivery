@@ -6,12 +6,14 @@ function useExchangeRate(currencyPair) {
   lscache.flushExpired(); // flushing expired cache
   const cachedRate = lscache.get('rate');
   const saveAndSetExchangeRate = (rate) => {
-    lscache.set('rate', rate, 60); // caching exchage rate for 60 min
-    setExchangeRate(rate);
+    if (rate) {
+      lscache.set('rate', rate, 60); // caching exchage rate for 60 min
+      setExchangeRate(rate);
+    }
   };
   useEffect(() => {
     async function fetchData() {
-      const res = await window.fetch(`https://free.currconv.com/api/v7/convert?q=${currencyPair}&compact=ultra&apiKey=22116ba83b453185f79c`);
+      const res = await window.fetch(`https://free.currconv.com/api/v7/convert?q=${currencyPair}&compact=ultra&apiKey=${process.env.CURRCONV_API_KEY}`);
       res
         .json()
         .then((result) => saveAndSetExchangeRate(result[currencyPair]))
@@ -21,6 +23,7 @@ function useExchangeRate(currencyPair) {
       fetchData();
     }
   });
+  console.log(typeof exchangeRate, exchangeRate);
   return exchangeRate || cachedRate;
 }
 

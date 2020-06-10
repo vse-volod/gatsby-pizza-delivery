@@ -2,7 +2,7 @@ import {
   useReducer, useEffect,
 } from 'react';
 
-function useLocallyPersistedReducer(reducer, defaultState, storageKey, init = null) {
+function useLocallyPersistedReducer(reducer, defaultState, storageKey = 'cart', init = null) {
   const hookVars = useReducer(reducer, defaultState, () => {
     const persisted = JSON.parse(window.localStorage.getItem(storageKey));
     if (persisted) {

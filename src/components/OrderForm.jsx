@@ -9,7 +9,7 @@ import Heading from './Heading';
 
 const Input = styled.input`
   border-radius: 1rem;
-  border-color: ${(p) => ((p.error && p.error.type === 'required') ? '#de0000' : '#F2E0AB;')};
+  ${(p) => ((p.error && p.error.type === 'required') ? tw`border-red` : tw`border-light`)};
   ${tw`h-12 px-4 border-2 focus:outline-none`}
 `;
 
@@ -23,8 +23,7 @@ const FieldLabel = styled.label`
 
 const OrderFormButton = styled.input`
   border-radius: 1rem;
-  background-color: #D45D27;
-  ${tw`mt-4 mx-auto text-white w-40 h-10 uppercase`}
+  ${tw`mt-4 mx-auto text-white w-40 h-10 uppercase bg-primary`}
 `;
 
 const OrderForm = ({ onSubmit }) => {

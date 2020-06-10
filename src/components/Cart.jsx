@@ -8,8 +8,8 @@ import { useCart } from '../utils/useCart';
 import ItemControls from './ItemControls';
 
 const CartItem = styled.div`
-  font-family: 'Montserrat';
-  ${tw`flex items-center text-black uppercase font-semibold p-3 border-b border-black`}
+  ${tw`flex items-center text-black uppercase 
+  font-semibold p-3 border-b border-black font-body`}
 `;
 
 const CartItemTitle = styled.div`
@@ -24,8 +24,7 @@ const CartFooter = styled.div`
 const CartButton = styled((p) => (
   <AnchorLink {...p} />
 ))`
-  ${tw`rounded-full px-4 py-1 text-white`}
-  background-color: #D45D27;
+  ${tw`rounded-full px-4 py-1 text-white bg-primary`}
 `;
 
 const getPizzaData = (sku, pizzas) => pizzas.nodes.find((p) => p.fields.sku === sku).frontmatter;

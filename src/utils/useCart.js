@@ -32,6 +32,8 @@ export const CartProvider = ({ children, initialCart = [] }) => {
 
   const isInCartHandler = (sku) => state.items.some((item) => item.sku === sku);
 
+  const findItemInCartHandler = (sku) => state.items.find((cartItem) => cartItem.sku === sku);
+
   return (
     <CartContext.Provider
       value={{
@@ -43,6 +45,7 @@ export const CartProvider = ({ children, initialCart = [] }) => {
         removeLineItem: removeLineItemHandler,
         clearCart: clearCartHandler,
         isInCart: isInCartHandler,
+        getItem: findItemInCartHandler,
       }}
     >
       {children}

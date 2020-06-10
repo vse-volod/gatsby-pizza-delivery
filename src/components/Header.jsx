@@ -7,15 +7,12 @@ import styled from '@emotion/styled';
 import { useCart } from '../utils/useCart';
 
 const HeaderSection = styled.section`
-  ${tw`flex justify-start sm:justify-center items-center w-full relative text-center`}
+  ${tw`flex text-light justify-start sm:justify-center items-center w-full relative text-center bg-primary`}
   height: 130px;
-  background-color: #D45D27;
-  color: #F2E0AB;
 `;
 
 const Title = styled.h1`
-  ${tw`text-4xl sm:text-6xl pl-4 sm:pl-0`}
-  font-family: 'Pacifico';
+  ${tw`text-4xl sm:text-6xl pl-4 sm:pl-0 font-title`}
 `;
 
 const SubTitle = styled.p`
@@ -29,14 +26,14 @@ const HeaderButtons = styled.div`
 `;
 
 const Button = styled.button`
-    ${tw`relative pl-8 focus:outline-none`}
+  ${tw`relative pl-8 focus:outline-none`}
 `;
 
 const QtyIndicator = styled.div`
-    background-color: #FF5E15;
-    right: -1.4rem;
-    ${tw`text-white text-sm font-semibold rounded-full 
-    w-6 h-6 leading-6 inline-block text-center absolute bottom-0`}
+  background-color: #FF5E15;
+  right: -1.4rem;
+  ${tw`text-white text-sm font-semibold rounded-full 
+  w-6 h-6 leading-6 inline-block text-center absolute bottom-0`}
 `;
 
 const Header = ({ cartHandler, cartOpened }) => {

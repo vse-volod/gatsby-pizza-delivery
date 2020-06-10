@@ -9,8 +9,7 @@ const ControlButton = styled.button`
 `;
 
 const Controls = styled.div`
-  color: #337C31;
-  ${tw`flex`};
+  ${tw`flex text-green`};
 `;
 
 const Quantity = styled.div`

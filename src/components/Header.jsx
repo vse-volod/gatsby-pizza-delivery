@@ -7,15 +7,12 @@ import styled from '@emotion/styled';
 import { useCart } from '../utils/useCart';
 
 const HeaderSection = styled.section`
-  ${tw`flex justify-start sm:justify-center items-center w-full relative text-center`}
+  ${tw`flex text-light justify-start sm:justify-center items-center w-full relative text-center bg-primary`}
   height: 130px;
-  background-color: #D45D27;
-  color: #F2E0AB;
 `;
 
 const Title = styled.h1`
-  ${tw`text-4xl sm:text-6xl pl-4 sm:pl-0`}
-  font-family: 'Pacifico';
+  ${tw`text-4xl sm:text-6xl pl-4 sm:pl-0 font-title`}
 `;
 
 const SubTitle = styled.p`

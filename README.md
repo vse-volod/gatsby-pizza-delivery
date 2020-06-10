@@ -73,6 +73,8 @@ GETFORM_API_KEY="SoMe-KeY"
 CURRCONV_API_KEY="SoMe-KeY"
 ```
 
+## Troubleshooting:
+When removing or changing item's name, ensure that you manually removed "cart" item from localStorage
 
 ## TODO's:
 * separate pages for each item with complete description and more photos

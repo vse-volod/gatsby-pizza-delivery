@@ -7,7 +7,7 @@ const CartContext = createContext();
 
 export const CartProvider = ({ children, initialCart = [] }) => {
   const useCachedReducer = typeof window === 'undefined' ? useReducer : useLocallyPersistedReducer;
-  const [state, dispatch] = useCachedReducer(reducer, { items: initialCart }, 'cart');
+  const [state, dispatch] = useCachedReducer(reducer, { items: initialCart });
 
   const addItemHandler = (sku, quantity = 1) => {
     dispatch({ type: 'ADD_ITEM', payload: { sku, quantity } });

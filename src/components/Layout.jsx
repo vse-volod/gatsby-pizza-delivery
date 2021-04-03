@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import PropTypes from 'prop-types';
-import tw from 'twin.macro';
+import tw, { GlobalStyles } from 'twin.macro';
 import styled from '@emotion/styled';
 import { CartProvider } from '../utils/useCart';
 import Cart from './Cart';
@@ -39,6 +39,7 @@ const Layout = ({ children }) => {
   const exchangeRate = useExchangeRate('EUR_USD');
   return (
     <CartProvider>
+      <GlobalStyles />
       <Header cartHandler={setCartOpen} cartOpened={cartOpened} />
       <LayoutSection>
         <Container>

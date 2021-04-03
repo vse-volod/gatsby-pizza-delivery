@@ -58,23 +58,7 @@ module.exports = {
         whitelist: ['CURRCONV_API_KEY', 'GETFORM_API_KEY'],
       },
     },
-    {
-      resolve: 'gatsby-plugin-prefetch-google-fonts',
-      options: {
-        fonts: [
-          {
-            family: 'Pacifico',
-            subsets: ['latin'],
-            variants: ['400'],
-          },
-          {
-            family: 'Montserrat',
-            subsets: ['latin'],
-            variants: ['400', '600', '700'],
-          },
-        ],
-      },
-    },
+    'gatsby-plugin-preload-fonts',
     'gatsby-plugin-offline',
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-emotion',

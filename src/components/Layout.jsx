@@ -6,7 +6,6 @@ import styled from '@emotion/styled';
 import { CartProvider } from '../utils/useCart';
 import Cart from './Cart';
 import Header from './Header';
-import useExchangeRate from '../utils/useExchangeRate';
 
 const Container = styled.div`
   ${tw`container mx-auto py-12 sm:py-24 px-2 sm:px-0`}
@@ -36,7 +35,6 @@ const Layout = ({ children }) => {
     open: { opacity: 1, x: 0 },
     hidden: { opacity: 0, x: 300 },
   };
-  const exchangeRate = useExchangeRate('EUR_USD');
   return (
     <CartProvider>
       <GlobalStyles />
@@ -51,7 +49,7 @@ const Layout = ({ children }) => {
             <CartContainer cartOpened={cartOpened}>
               <Motion variants={cartFrameVariants}>
                 <CartFrame>
-                  <Cart exchangeRate={exchangeRate} />
+                  <Cart />
                 </CartFrame>
               </Motion>
             </CartContainer>

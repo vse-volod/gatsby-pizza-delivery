@@ -5,7 +5,7 @@ import useLocallyPersistedReducer from './reducerSync';
 
 const CartContext = createContext();
 
-export const CartProvider = ({ children, initialCart = [] }) => {
+export const CartProvider = ({ children, initialCart }) => {
   const useCachedReducer = typeof window === 'undefined' ? useReducer : useLocallyPersistedReducer;
   const [state, dispatch] = useCachedReducer(reducer, { items: initialCart });
 
@@ -55,7 +55,11 @@ export const CartProvider = ({ children, initialCart = [] }) => {
 
 CartProvider.propTypes = {
   children: PropTypes.node.isRequired,
-  initialCart: PropTypes.array.isRequired,
+  initialCart: PropTypes.array,
+};
+
+CartProvider.defaultProps = {
+  initialCart: [],
 };
 
 

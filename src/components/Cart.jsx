@@ -32,9 +32,8 @@ const priceTotal = (items, pizzas, deliveryPrice) => items.reduce(
   (total, onePizza) => total + (getPizzaData(onePizza.sku, pizzas).price * onePizza.quantity),
   deliveryPrice,
 );
-const convertPriceToEUR = (price, rate) => (rate ? (price * rate).toFixed(2) : 'N/A');
 
-const Cart = ({ exchangeRate, hideFooter }) => {
+const Cart = ({ hideFooter }) => {
   const data = useStaticQuery(
     graphql`
       query {
@@ -70,9 +69,6 @@ const Cart = ({ exchangeRate, hideFooter }) => {
               </CartItemTitle>
               $
               {pizzaData.price * item.quantity}
-              /
-              {convertPriceToEUR((pizzaData.price * item.quantity), exchangeRate)}
-              €
               <ItemControls
                 sku={item.sku}
               />
@@ -87,9 +83,6 @@ const Cart = ({ exchangeRate, hideFooter }) => {
           <CartItemTitle>delivery costs:</CartItemTitle>
           $
           {deliveryPriceInUSD}
-          /
-          {convertPriceToEUR(deliveryPriceInUSD, exchangeRate)}
-          €
         </CartItem>
         )}
         <CartItem>
@@ -100,9 +93,6 @@ const Cart = ({ exchangeRate, hideFooter }) => {
           </CartItemTitle>
           $
           {priceTotalInUSD}
-          /
-          {convertPriceToEUR(priceTotalInUSD, exchangeRate)}
-          €
         </CartItem>
         {!hideFooter && (
           <CartFooter>
@@ -117,7 +107,6 @@ const Cart = ({ exchangeRate, hideFooter }) => {
 };
 
 Cart.propTypes = {
-  exchangeRate: PropTypes.number.isRequired,
   hideFooter: PropTypes.bool,
 };
 

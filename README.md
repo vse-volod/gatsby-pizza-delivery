@@ -1,17 +1,17 @@
 <h1 align="center">
-  Gatsby Pizza Delivery Starter
+  Gatsby Starter Pizza
 </h1>
 
 <img src="https://i.ibb.co/y6G6SKT/Screenshot-20200610-010756.png" alt="Screenshot-20200610-010756" width="500px" />
 
 Starter designed for delivery business
 
-[Demo](https://gatsby-pizza-delivery.now.sh/)
-
+[Demo](https://pizza.gatsbytemplates.io/)
+[More themes](https://gatsbytemplates.io/)
 ## Installation
 
 ```sh
-gatsby new project-name https://github.com/vse-volod/gatsby-pizza-delivery.git
+gatsby new project-name https://github.com/gatsbytemplates/gatsby-starter-pizza.git
 ```
 
 Or manually:
@@ -27,7 +27,6 @@ npm i
 ## Features
 
 * Built-in cart with cache
-* Multiple currencies support with updated exchange rate
 * Order form with [GetForm](https://getform.io/) integration
 * Cart animation
 
@@ -67,10 +66,9 @@ All colors and fonts are defined in "tailwind.config.js" in root of this starter
 To add Google Fonts, go to gatsby-config.js, find "gatsby-plugin-prefetch-google-fonts" section and edit it.
 
 ## API's integration
-In order to work with [GetForm](https://getform.io/) and [CurrencyConverter](https://www.currencyconverterapi.com/), you need to register there and get your personal API keys. Then, add them to your .env.development :
+In order to work with [GetForm](https://getform.io/) you need to register there and get your personal API keys. Then, add them to your .env.development :
 ```
 GETFORM_API_KEY="SoMe-KeY"
-CURRCONV_API_KEY="SoMe-KeY"
 ```
 
 ## Troubleshooting:

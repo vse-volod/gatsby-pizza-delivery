@@ -1,11 +1,11 @@
 {
-  "name": "gatsby-pizza-delivery",
+  "name": "gatsby-starter-pizza",
   "private": true,
   "description": "Example of pizza delivery site implemented using GatsbyJS",
   "version": "0.1.0",
-  "author": "Vsevolod",
+  "author": "GatsbyTemplates.io",
   "bugs": {
-    "url": "https://github.com/vse-volod/gatsby-pizza-delivery/issues"
+    "url": "https://github.com/gatsbytemplates/gatsby-starter-pizza/issues"
   },
   "dependencies": {
     "@babel/core": "^7.13.14",
@@ -59,7 +59,7 @@
       "preset": "emotion"
     }
   },
-  "homepage": "https://github.com/vse-volod/gatsby-pizza-delivery#readme",
+  "homepage": "https://github.com/gatsbytemplates/gatsby-starter-pizza#readme",
   "keywords": [
     "gatsby"
   ],
@@ -67,7 +67,7 @@
   "main": "n/a",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vse-volod/gatsby-pizza-delivery.git"
+    "url": "git+https://github.com/gatsbytemplates/gatsby-starter-pizza.git"
   },
   "scripts": {
     "build": "gatsby build",

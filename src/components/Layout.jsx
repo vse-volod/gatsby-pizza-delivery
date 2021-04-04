@@ -6,6 +6,7 @@ import styled from '@emotion/styled';
 import { CartProvider } from '../utils/useCart';
 import Cart from './Cart';
 import Header from './Header';
+import Footer from './Footer';
 
 const Container = styled.div`
   ${tw`container mx-auto py-12 sm:py-24 px-2 sm:px-0`}
@@ -54,6 +55,7 @@ const Layout = ({ children }) => {
               </Motion>
             </CartContainer>
           </Motion>
+          <Footer />
         </Container>
       </LayoutSection>
     </CartProvider>
